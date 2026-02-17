@@ -171,3 +171,9 @@ This project demonstrates:
 Bryan Cedeno  
 Backend Developer  
 Costa Rica
+
+---
+
+## License
+
+This project is **MIT licensed**. See [LICENSE](LICENSE) for details.
