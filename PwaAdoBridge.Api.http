@@ -1,0 +1,6 @@
+@PwaAdoBridge.Api_HostAddress = http://localhost:5111
+
+GET {{PwaAdoBridge.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
