@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "n8VX0hPscHE=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\bryan\\OneDrive\\Documents\\PwaAdoBridge.Api\\PwaAdoBridge.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\10.0.0\\microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.identity.client\\4.79.2\\microsoft.identity.client.4.79.2.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.15.0\\microsoft.identitymodel.abstractions.8.15.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.15.0\\microsoft.identitymodel.jsonwebtokens.8.15.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.identitymodel.logging\\8.15.0\\microsoft.identitymodel.logging.8.15.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.15.0\\microsoft.identitymodel.tokens.8.15.0.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.openapi\\2.4.1\\microsoft.openapi.2.4.1.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\microsoft.sharepointonline.csom\\16.1.26615.12013\\microsoft.sharepointonline.csom.16.1.26615.12013.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\swashbuckle.aspnetcore\\10.1.3\\swashbuckle.aspnetcore.10.1.3.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.1.3\\swashbuckle.aspnetcore.swagger.10.1.3.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.1.3\\swashbuckle.aspnetcore.swaggergen.10.1.3.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.1.3\\swashbuckle.aspnetcore.swaggerui.10.1.3.nupkg.sha512",
+    "C:\\Users\\bryan\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.15.0\\system.identitymodel.tokens.jwt.8.15.0.nupkg.sha512"
+  ],
+  "logs": []
+}
