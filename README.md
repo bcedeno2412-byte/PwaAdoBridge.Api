@@ -1,131 +1,114 @@
-# PwaAdoBridge
+# PwaAdoBridge API
 
-A backend .NET API that syncs **Project Online (PWA)** projects and tasks with **Azure DevOps**. This project is designed as a **pure backend service** that can be deployed to Azure App Services and consumed by external clients like chatbots or other systems via HTTP requests.
+![.NET](https://img.shields.io/badge/.NET-10-blue)
+![C#](https://img.shields.io/badge/C%23-Backend-green)
+![Architecture](https://img.shields.io/badge/Architecture-Clean-orange)
 
----
+## 📌 Overview
 
-## Table of Contents
+PwaAdoBridge API is a backend service that synchronizes Microsoft Project Online (PWA) projects and tasks with Azure DevOps work items.
 
-* [Overview](#overview)
-* [Features](#features)
-* [Getting Started](#getting-started)
-* [Configuration](#configuration)
-* [Usage](#usage)
-* [Project Structure](#project-structure)
-* [Contributing](#contributing)
-* [License](#license)
+This project demonstrates clean architecture principles, structured DTO modeling, external service integration, and professional API documentation using Swagger.
+
+> ⚠️ This is a backend-only API. There is no frontend UI included.
 
 ---
 
-## Overview
+## 🛠️ Tech Stack
 
-This API provides endpoints to:
-
-* Retrieve projects from **Project Online**.
-* Sync projects and tasks from **Project Online** to **Azure DevOps**.
-* Validate project and task data before syncing.
-
-It does **not** include a frontend or Swagger UI—this is purely a backend service meant to be integrated with other applications, such as chatbots, automation scripts, or webhooks.
-
----
-
-## Features
-
-* Retrieve all PWA projects or a single project with tasks.
-* Sync projects and tasks to Azure DevOps with **epic/task hierarchy**.
-* Validate dates and required fields before syncing.
-* Logging of all sync operations and errors for monitoring.
-* Supports two sync modes:
-
-  * `PwaProjectToDevOps` (default)
-  * `DevOpsOnly`
+- .NET 10
+- C#
+- ASP.NET Core Web API
+- Swagger (OpenAPI)
+- Azure DevOps REST API
+- Microsoft Project Online (PWA)
+- MSAL Authentication
 
 ---
 
-## Getting Started
+## 🏗️ Architecture
 
-### Prerequisites
+The project follows a layered and maintainable structure:
 
-* [.NET 10 SDK](https://dotnet.microsoft.com/download)
-* Access to **Project Online (PWA)**
-* Access to **Azure DevOps** with a **Personal Access Token**
+- Controllers → Handle HTTP requests
+- Services → Business logic & external integrations
+- DTOs → Structured data contracts
+- Options → Configuration binding (Azure DevOps settings)
+- Auth → Token acquisition using MSAL
 
-### Installation
+Designed to be consumed by other applications or enterprise systems.
+
+---
+
+## 🚀 How to Run Locally
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/PwaAdoBridge.git
-cd PwaAdoBridge
+git clone https://github.com/bcedeno2412-byte/PwaAdoBridge.Api.git
 ```
 
-2. Restore dependencies:
+2. Navigate into the project:
 
 ```bash
-dotnet restore
+cd PwaAdoBridge.Api
 ```
 
-3. Build the project:
-
-```bash
-dotnet build
-```
-
-4. Run locally (for testing):
+3. Run the API:
 
 ```bash
 dotnet run
 ```
 
----
+4. Open Swagger in your browser:
 
-## Configuration
-
-The application uses **appsettings.json** or environment variables for configuration:
-
-```json
-"Pwa": {
-  "Url": "<PWA site URL>",
-  "TenantId": "<Azure AD tenant ID>",
-  "ClientId": "<Azure AD app client ID>",
-  "Username": "<PWA username>",
-  "Password": "<PWA password>",
-  "SharepointUrl": "<SharePoint site URL>"
-},
-"AzureDevOps": {
-  "OrganizationUrl": "<Azure DevOps organization URL>",
-  "ProjectName": "<DevOps project name>",
-  "PersonalAccessToken": "<PAT token>"
-}
+```
+http://localhost:{PORT}/swagger
 ```
 
-Make sure credentials and tokens are **never committed** to GitHub. Use environment variables or GitHub Secrets for deployment.
+(Use the port shown in your terminal output.)
 
 ---
 
-## Usage
+## 📬 Available Endpoint
 
-The API exposes endpoints like:
+### POST `/api/devops-test/demo`
 
-* `GET /api/pwa/projects` – List all PWA projects.
-* `GET /api/pwa/projects/{projectUid}` – Get a project with its tasks.
-* `POST /api/pwa/projects/{projectUid}/sync` – Sync a PWA project to DevOps.
-* `POST /api/sync/project` – Sync project data from JSON payload (used by external apps like chatbots).
+Creates demo PWA projects and synchronizes them into Azure DevOps as work items.
 
-Example JSON payload for `POST /api/sync/project`:
+---
+
+## 📦 Example Response (SyncResult)
 
 ```json
 {
-  "ProjectUid": "1234-5678-90AB-CDEF",
-  "ProjectName": "My PWA Project",
-  "StartDate": "2026-01-01T00:00:00Z",
-  "FinishDate": "2026-01-31T00:00:00Z",
-  "Tasks": [
+  "success": true,
+  "message": "Synchronization completed",
+  "errorCode": null,
+  "validationErrors": [],
+  "projectsProcessed": 1,
+  "workItemsCreated": 3,
+  "workItemsUpdated": 0,
+  "errors": 0
+}
+```
+
+---
+
+## 📦 Example Payload (PwaProjectDto)
+
+```json
+{
+  "projectUid": "12345",
+  "projectName": "Demo Project",
+  "startDate": "2026-02-01T00:00:00Z",
+  "finishDate": "2026-02-10T00:00:00Z",
+  "tasks": [
     {
-      "TaskUid": "ABCD-1234",
-      "TaskName": "Task 1",
-      "StartDate": "2026-01-01T00:00:00Z",
-      "FinishDate": "2026-01-05T00:00:00Z"
+      "taskUid": "task-1",
+      "taskName": "Planning",
+      "startDate": "2026-02-01T00:00:00Z",
+      "finishDate": "2026-02-03T00:00:00Z"
     }
   ]
 }
@@ -133,24 +116,58 @@ Example JSON payload for `POST /api/sync/project`:
 
 ---
 
-## Project Structure
+## 📖 Swagger Documentation
 
-* `Controllers/` – API endpoints.
-* `Services/` – Business logic and integration with PWA and DevOps.
-* `Dtos/` – Data transfer objects for projects and tasks.
-* `Auth/` – Authentication logic for Project Online.
-* `Options/` – Configuration classes for DevOps and PWA.
+Swagger UI is enabled in development mode.
+
+It provides:
+
+- Full endpoint documentation
+- Schema definitions (DTOs like `SyncResult`)
+- Interactive request testing
+- Structured response modeling
+
+Access via:
+
+```
+/swagger
+```
 
 ---
 
-## Contributing
+## 🔐 Configuration
 
-* Fork the repository and create a new branch for features/bugs.
-* Follow clean code and logging practices.
-* Submit pull requests with clear descriptions.
+Sensitive credentials must be configured inside:
+
+```
+appsettings.json
+```
+
+Example configuration includes:
+
+- Azure DevOps Organization URL
+- Project Name
+- Personal Access Token
+- Tenant ID / Client ID (for MSAL authentication)
+
+⚠️ Never commit real credentials to GitHub.
 
 ---
 
-## License
+## 🎯 Purpose of This Project
 
-This project is **MIT licensed**. See [LICENSE](LICENSE) for details.
+This project demonstrates:
+
+- Enterprise backend API design
+- Integration with Microsoft services
+- Clean separation of concerns
+- Structured error handling & result modeling
+- Professional API documentation
+
+---
+
+## 👨‍💻 Author
+
+Bryan Cedeno  
+Backend Developer  
+Costa Rica
